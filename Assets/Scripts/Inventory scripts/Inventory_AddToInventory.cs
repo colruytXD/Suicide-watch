@@ -23,9 +23,17 @@ public class Inventory_AddToInventory : MonoBehaviour {
         itemMaster = GetComponent<Item_Master>();
 	}
 
-    void AddToInventory(int refNumber, GameObject item)
+    //Changes an index of the inventory to the item's refNumber
+    void AddToInventory(int refNumber, GameObject item, int inventoryIndex)
     {
-        print("Adding item to inventory with refnumber: " + refNumber);
-        inventoryMaster.inventory.Add(refNumber);
+        if(inventoryMaster.inventory[0] == 0)
+        {
+            inventoryMaster.inventory[0] = refNumber;
+        }
+        else
+        {
+            inventoryMaster.inventory[1] = refNumber;
+        }
+        
     }
 }

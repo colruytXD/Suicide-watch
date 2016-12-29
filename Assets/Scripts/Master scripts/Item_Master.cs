@@ -4,10 +4,11 @@ using System.Collections;
 public class Item_Master : MonoBehaviour {
 
     private Inventory_Master inventoryMaster;
+    public Item_List itemList;
 
     public int refNumber;
 
-    public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item);
+    public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int inventoryIndex);
 
     public event PlayerItemInteractionHandler EventPickUpItem;
     public event PlayerItemInteractionHandler EventDropItem;
@@ -18,29 +19,28 @@ public class Item_Master : MonoBehaviour {
     public event GeneralEventHandler EventItemDeath;
     public event GeneralEventHandler EventUseItem;
 
-    public void CallEventPickupItem(int refNumber, GameObject item)
+    public void CallEventPickupItem(int refNumber, GameObject item, int inventoryIndex)
     {
-        print("Eventing pickup event");
-        if(inventoryMaster.inventory.Count < inventoryMaster.maxInventoryCount)
-        {
-            EventPickUpItem(refNumber, item);
+            EventPickUpItem(refNumber, item, inventoryIndex);
             item.GetComponent<Item_Master>().CallEventItemDeath();
+    }
+
+    public void CallEventDropItem(int refNumber, GameObject item, int inventoryIndex)
+    {
+        if(inventoryMaster.inventory[inventoryIndex] != 0)
+        {
+            int _refNumber = inventoryMaster.inventory[inventoryIndex];
+            EventDropItem(_refNumber, item, inventoryIndex);
         }
         else
         {
-            Debug.Log("Already have the max inventory count");
+            Debug.Log("Can't drop item from chosen inventory slot: Empty");
         }
-        
     }
 
-    public void CallEventDropItem(int refNumber, GameObject item)
+    public void CallEventUseItem(int refNumber, GameObject item, int inventoryIndex)
     {
-        EventDropItem(refNumber, item);
-    }
-
-    public void CallEventUseItem(int refNumber, GameObject item)
-    {
-        EventUseItemAction(refNumber, item);
+        EventUseItemAction(refNumber, item, inventoryIndex);
     }
 
     public void CallEventItemDeath()

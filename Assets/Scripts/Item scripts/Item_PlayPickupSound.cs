@@ -26,7 +26,7 @@ public class Item_PlayPickupSound : MonoBehaviour {
         itemMaster = GetComponent<Item_Master>();
 	}
 
-    void PlayPickupSound(int nn, GameObject nn1)
+    void PlayPickupSound(int nn, GameObject nn1, int inventoryIndex)
     {
         pickupSoundSource.clip = pickupSound;
         pickupSoundSource.Play();

@@ -18,7 +18,7 @@ public class Item_CheckForPickup : MonoBehaviour {
 
     void SetInitialReferences()
     {
-        itemMaster = GetComponent<Item_Master>();
+        itemMaster = transform.root.GetComponent<Item_Master>();
     }
 
 	void Update() 
@@ -26,18 +26,21 @@ public class Item_CheckForPickup : MonoBehaviour {
         CheckForItem();
 	}
 
+    //Checks when player wants to pick up item
+    //Checks raycast for item
+    //Calls pickup item event
     void CheckForItem()
     {
         if(Input.GetButtonDown("Pickup item"))
         {
+            Debug.DrawRay(transform.position, transform.forward, Color.red, 5f);
             if(Physics.Raycast(transform.position, transform.forward, out hit, pickupRange, itemLayer))
             {
-                if(hit.transform.GetComponent<Item_Master>() != null)
+                Debug.Log("Picked up: " + hit.transform.name);
+                if(hit.transform.root.GetComponent<Item_Master>() != null)
                 {
                     Item_Master thisItem = hit.transform.GetComponent<Item_Master>();                    
-                    itemMaster.CallEventPickupItem(thisItem.refNumber, hit.transform.gameObject);
-
-                    print("Calling pickup item event. Picking up item with refnumber: " + thisItem.refNumber);
+                    itemMaster.CallEventPickupItem(thisItem.refNumber, hit.transform.gameObject, 0);
                 }
             }
         }
