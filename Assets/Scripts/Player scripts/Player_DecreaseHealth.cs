@@ -24,5 +24,10 @@ public class Player_DecreaseHealth : MonoBehaviour {
     void DecreasePlayerHealth(int amount)
     {
         playerMaster.Health -= amount;
+
+        if(playerMaster.Health < 0)
+        {
+            playerMaster.Health = 0;
+        }
     }
 }

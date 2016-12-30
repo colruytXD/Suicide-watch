@@ -9,15 +9,13 @@ public class Inventory_RemoveFromInventory : MonoBehaviour {
 	void OnEnable() 
 	{
 		SetInitialReferences();
-        itemMaster.EventDropItem += RemoveFromInventory;
-        itemMaster.EventUseItemAction += RemoveFromInventory;
-	}
+        inventoryMaster.EventRemoveFromInventory += RemoveFromInventory;
+    }
 
 	void OnDisable() 
 	{
-        itemMaster.EventDropItem -= RemoveFromInventory;
-        itemMaster.EventUseItemAction -= RemoveFromInventory;
-	}
+        inventoryMaster.EventRemoveFromInventory -= RemoveFromInventory;
+    }
 
 	void SetInitialReferences() 
 	{
@@ -26,7 +24,7 @@ public class Inventory_RemoveFromInventory : MonoBehaviour {
     }
 
     //Sets the index value to 0 (no item)
-    void RemoveFromInventory(int refNumber, GameObject item, int selectedIndex)
+    public void RemoveFromInventory(int selectedIndex, int refNumber)
     {
             inventoryMaster.inventory[selectedIndex] = 0;
     }

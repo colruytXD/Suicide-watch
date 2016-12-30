@@ -4,6 +4,7 @@ using System.Collections;
 public class Item_CheckForDrop : MonoBehaviour {
 
     private Item_Master itemMaster;
+    private Inventory_Master inventoryMaster;
 
 	void OnEnable() 
 	{
@@ -18,6 +19,7 @@ public class Item_CheckForDrop : MonoBehaviour {
 	void SetInitialReferences() 
 	{
         itemMaster = GetComponent<Item_Master>();
+        inventoryMaster = GetComponent<Inventory_Master>();
 	}
 
     //Checks for input => calls Drop Item Event.
@@ -26,6 +28,7 @@ public class Item_CheckForDrop : MonoBehaviour {
         if(Input.GetButtonDown("Drop item"))
         {
             itemMaster.CallEventDropItem(0, null, 0);
+            inventoryMaster.CallEventRemoveFromInventory(inventoryMaster.selectedInventorySlot);
         }
     }
 }

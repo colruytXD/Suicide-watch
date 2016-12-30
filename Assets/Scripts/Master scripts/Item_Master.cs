@@ -21,9 +21,15 @@ public class Item_Master : MonoBehaviour {
 
     public void CallEventPickupItem(int refNumber, GameObject item, int selectedIndex)
     {
-        selectedIndex = inventoryMaster.selectedInventorySlot;
-        EventPickUpItem(refNumber, item, selectedIndex);
-        item.GetComponent<Item_Master>().CallEventItemDeath();
+        if (!inventoryMaster.isInventoryFull)
+        {
+            selectedIndex = inventoryMaster.selectedInventorySlot;
+            inventoryMaster.CallEventAddToInventory(0, refNumber);
+            if(!inventoryMaster.isInventoryFull)
+            {
+                item.GetComponent<Item_Master>().CallEventItemDeath();
+            }
+        }                                            
     }
 
     public void CallEventDropItem(int refNumber, GameObject item, int selectedIndex)
@@ -33,6 +39,7 @@ public class Item_Master : MonoBehaviour {
         {
             int _refNumber = inventoryMaster.inventory[selectedIndex];
             EventDropItem(_refNumber, item, selectedIndex);
+            inventoryMaster.CallEventRemoveFromInventory(selectedIndex);
         }
         else
         {

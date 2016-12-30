@@ -12,15 +12,21 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
     void OnEnable()
     {
         SetInitialReferences();
-        itemMaster.EventPickUpItem += ChangeInventorySlotTexture;
-        itemMaster.EventDropItem += ChangeInventorySlotTexture;
-        ChangeInventorySlotTexture(0, null, 0);
+        inventoryMaster.EventRemoveFromInventory += ChangeInventorySlotTexture;
+        inventoryMaster.EventAddToInventory += ChangeInventorySlotTexture;
+        ChangeInventorySlotTexture(0, 0);
     }
 
     void OnDisable()
     {
-        itemMaster.EventPickUpItem -= ChangeInventorySlotTexture;
-        itemMaster.EventDropItem += ChangeInventorySlotTexture;
+        inventoryMaster.EventRemoveFromInventory += ChangeInventorySlotTexture;
+        inventoryMaster.EventAddToInventory -= ChangeInventorySlotTexture;
+
+    }
+
+    void Update()
+    {
+        print(inventoryMaster.isInventoryFull);
     }
 
     void SetInitialReferences()
@@ -31,8 +37,9 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
     }
 
     //Checks the inventory and updates all the inventory slots in UI
-    void ChangeInventorySlotTexture(int refNumber, GameObject item, int nn)
+    void ChangeInventorySlotTexture(int SelectedIndex, int refNumber)
     {
+        print("I must change the slot texture!");
         for (int i = 0; i < inventoryMaster.maxInventoryCount; i++)
         {
             if (inventoryMaster.inventory[i] == 0)

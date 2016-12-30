@@ -9,12 +9,12 @@ public class Inventory_AddToInventory : MonoBehaviour {
 	void OnEnable() 
 	{
 		SetInitialReferences();
-        itemMaster.EventPickUpItem += AddToInventory;
+        inventoryMaster.EventAddToInventory += AddToInventory;
 	}
 
 	void OnDisable() 
 	{
-        itemMaster.EventPickUpItem += AddToInventory;
+        inventoryMaster.EventAddToInventory += AddToInventory;
 	}
 
 	void SetInitialReferences() 
@@ -24,16 +24,15 @@ public class Inventory_AddToInventory : MonoBehaviour {
 	}
 
     //Changes an index of the inventory to the item's refNumber
-    void AddToInventory(int refNumber, GameObject item, int inventoryIndex)
+    void AddToInventory(int selectedIndex, int refNumber)
     {
         if(inventoryMaster.inventory[0] == 0)
         {
             inventoryMaster.inventory[0] = refNumber;
         }
-        else
+        else if(inventoryMaster.inventory[1] == 0)
         {
             inventoryMaster.inventory[1] = refNumber;
-        }
-        
+        }        
     }
 }
