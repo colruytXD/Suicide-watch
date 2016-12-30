@@ -23,13 +23,9 @@ public class Item_CheckForDrop : MonoBehaviour {
     //Checks for input => calls Drop Item Event.
     void CheckForDrop()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetButtonDown("Drop item"))
         {
             itemMaster.CallEventDropItem(0, null, 0);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            itemMaster.CallEventDropItem(0, null, 1);
         }
     }
 }

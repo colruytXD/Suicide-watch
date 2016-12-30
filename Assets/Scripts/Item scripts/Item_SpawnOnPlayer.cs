@@ -26,7 +26,6 @@ public class Item_SpawnOnPlayer : MonoBehaviour {
     void SpawnGO(int refNumber, GameObject item, int nn)
     {
         GameObject wantedItem = itemMaster.itemList.itemGOList[refNumber - 1];
-        print(wantedItem.transform.name);
         Instantiate(wantedItem, player.position + player.forward, Quaternion.identity);
     }
 }

@@ -8,7 +8,7 @@ public class Item_Master : MonoBehaviour {
 
     public int refNumber;
 
-    public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int inventoryIndex);
+    public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int selectedIndex);
 
     public event PlayerItemInteractionHandler EventPickUpItem;
     public event PlayerItemInteractionHandler EventDropItem;
@@ -19,18 +19,20 @@ public class Item_Master : MonoBehaviour {
     public event GeneralEventHandler EventItemDeath;
     public event GeneralEventHandler EventUseItem;
 
-    public void CallEventPickupItem(int refNumber, GameObject item, int inventoryIndex)
+    public void CallEventPickupItem(int refNumber, GameObject item, int selectedIndex)
     {
-            EventPickUpItem(refNumber, item, inventoryIndex);
-            item.GetComponent<Item_Master>().CallEventItemDeath();
+        selectedIndex = inventoryMaster.selectedInventorySlot;
+        EventPickUpItem(refNumber, item, selectedIndex);
+        item.GetComponent<Item_Master>().CallEventItemDeath();
     }
 
-    public void CallEventDropItem(int refNumber, GameObject item, int inventoryIndex)
+    public void CallEventDropItem(int refNumber, GameObject item, int selectedIndex)
     {
-        if(inventoryMaster.inventory[inventoryIndex] != 0)
+        selectedIndex = inventoryMaster.selectedInventorySlot;
+        if(inventoryMaster.inventory[inventoryMaster.selectedInventorySlot] != 0)
         {
-            int _refNumber = inventoryMaster.inventory[inventoryIndex];
-            EventDropItem(_refNumber, item, inventoryIndex);
+            int _refNumber = inventoryMaster.inventory[selectedIndex];
+            EventDropItem(_refNumber, item, selectedIndex);
         }
         else
         {

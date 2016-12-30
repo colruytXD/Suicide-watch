@@ -37,10 +37,14 @@ public class Item_CheckForPickup : MonoBehaviour {
             if(Physics.Raycast(transform.position, transform.forward, out hit, pickupRange, itemLayer))
             {
                 Debug.Log("Picked up: " + hit.transform.name);
-                if(hit.transform.root.GetComponent<Item_Master>() != null)
+                if(hit.transform.GetComponent<Item_Master>() != null)
                 {
                     Item_Master thisItem = hit.transform.GetComponent<Item_Master>();                    
                     itemMaster.CallEventPickupItem(thisItem.refNumber, hit.transform.gameObject, 0);
+                }
+                else
+                {
+                    print("null");
                 }
             }
         }
