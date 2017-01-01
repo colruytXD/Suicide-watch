@@ -24,11 +24,6 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
 
     }
 
-    void Update()
-    {
-        print(inventoryMaster.isInventoryFull);
-    }
-
     void SetInitialReferences()
     {
         inventoryMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory_Master>();
@@ -39,7 +34,6 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
     //Checks the inventory and updates all the inventory slots in UI
     void ChangeInventorySlotTexture(int SelectedIndex, int refNumber)
     {
-        print("I must change the slot texture!");
         for (int i = 0; i < inventoryMaster.maxInventoryCount; i++)
         {
             if (inventoryMaster.inventory[i] == 0)

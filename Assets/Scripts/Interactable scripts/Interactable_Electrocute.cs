@@ -6,6 +6,9 @@ public class Interactable_Electrocute : MonoBehaviour {
     private Player_Master playerMaster;
     private Interactable_Master interactableMaster;
 
+    [SerializeField]
+    private int damage;
+
 	void OnEnable() 
 	{
 		SetInitialReferences();
@@ -23,8 +26,9 @@ public class Interactable_Electrocute : MonoBehaviour {
         playerMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Master>();
 	}
 
+    //Damages player
     void Electrocute()
     {
-        playerMaster.CallEventPlayerTakesDamage(50);
+        playerMaster.CallEventPlayerTakesDamage(damage);
     }
 }

@@ -13,14 +13,12 @@ public class Interactable_Master : MonoBehaviour {
 
     public void CallEventPlayerInteracts()
     {
-        print("Player tried interacting. checking inventory");
         int amountOfRightItems = 0;
 
         for(int i = 0; i < 2; i++)
         {
             for(int x = 0; x < requiredItemsRefNumbers.Count; x++)
             {
-                print("doing inventory slot " + i);
                 if(inventoryMaster.inventory[i] == requiredItemsRefNumbers[x])
                 {
                     amountOfRightItems++;

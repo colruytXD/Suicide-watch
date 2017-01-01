@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Item_Master : MonoBehaviour {
 
     private Inventory_Master inventoryMaster;
     public Item_List itemList;
 
+    public bool isInteractable;
+
     public int refNumber;
+
+    [Space]
+    public List<Component> useEffects = new List<Component>();
 
     public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int selectedIndex);
 
@@ -19,19 +24,22 @@ public class Item_Master : MonoBehaviour {
     public event GeneralEventHandler EventItemDeath;
     public event GeneralEventHandler EventUseItem;
 
+    //If the inventory isn't full
+    //add item to inventory through event on Inventory_Master
+    //destroy the item in the world
     public void CallEventPickupItem(int refNumber, GameObject item, int selectedIndex)
     {
         if (!inventoryMaster.isInventoryFull)
         {
             selectedIndex = inventoryMaster.selectedInventorySlot;
             inventoryMaster.CallEventAddToInventory(0, refNumber);
-            if(!inventoryMaster.isInventoryFull)
-            {
-                item.GetComponent<Item_Master>().CallEventItemDeath();
-            }
+            item.GetComponent<Item_Master>().CallEventItemDeath();
         }                                            
     }
-
+    
+    //if selected slot isn't empty
+    //Call dropItem event
+    //Call remove from inventory event
     public void CallEventDropItem(int refNumber, GameObject item, int selectedIndex)
     {
         selectedIndex = inventoryMaster.selectedInventorySlot;
@@ -59,6 +67,7 @@ public class Item_Master : MonoBehaviour {
 
     public void CallEventUseItem()
     {
+        print(transform.name);
         EventUseItem();
     }
 
