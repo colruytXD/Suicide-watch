@@ -56,8 +56,7 @@ public class Item_CheckForUse : MonoBehaviour {
             else
             {
                 print("Item isn't interactable. Using item");
-                Item_Master itemMasterOfGO;
-                itemMasterOfGO =  itemList.itemGOList[inventoryMaster.inventory[inventoryMaster.selectedInventorySlot] - 1].GetComponent<Item_Master>();
+                GameObject.FindGameObjectWithTag("ItemHandler").GetComponent<UseAble_Master>().CheckWhatEvent(inventoryMaster.inventory[inventoryMaster.selectedInventorySlot]);
             }
         }
     }
