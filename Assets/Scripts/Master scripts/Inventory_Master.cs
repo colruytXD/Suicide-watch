@@ -30,6 +30,7 @@ public class Inventory_Master : MonoBehaviour
     {
         isInventoryFull = false;
         EventRemoveFromInventory(selectedIndex, 0);
+        print("Removing " + selectedIndex + " index from inventory");
     }
 
     public void CallEventAddToInventory(int selectedIndex, int refNumber)

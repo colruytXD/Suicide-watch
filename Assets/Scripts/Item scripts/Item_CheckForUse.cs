@@ -11,6 +11,8 @@ public class Item_CheckForUse : MonoBehaviour {
     LayerMask interactableLayer;
     [SerializeField]
     int range;
+    [SerializeField]
+    private Transform useAbleItemParent;
 
 	void OnEnable() 
 	{
@@ -51,12 +53,19 @@ public class Item_CheckForUse : MonoBehaviour {
                 {
                     print("Found interactable with name: " + hit.transform.name);
                     hit.transform.GetComponent<Interactable_Master>().CallEventPlayerInteracts();
+                    inventoryMaster.CallEventRemoveFromInventory(inventoryMaster.selectedInventorySlot);
                 }
             }
             else
             {
                 print("Item isn't interactable. Using item");
-                GameObject.FindGameObjectWithTag("ItemHandler").GetComponent<UseAble_Master>().CheckWhatEvent(inventoryMaster.inventory[inventoryMaster.selectedInventorySlot]);
+                //Instantiates GO, calls use event on GO
+                Transform temp;
+                Instantiate(itemList.itemGOList[inventoryMaster.inventory[inventoryMaster.selectedInventorySlot] - 1], useAbleItemParent, true);
+                inventoryMaster.CallEventRemoveFromInventory(inventoryMaster.selectedInventorySlot);
+                temp = useAbleItemParent.GetChild(0);
+                temp.GetComponent<UseAble_Master>().CallEventUseItem();
+                temp.GetComponent<Item_Master>().CallEventItemDeath();
             }
         }
     }

@@ -10,9 +10,6 @@ public class Item_Master : MonoBehaviour {
 
     public int refNumber;
 
-    [Space]
-    public List<Component> useEffects = new List<Component>();
-
     public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int selectedIndex);
 
     public event PlayerItemInteractionHandler EventPickUpItem;
