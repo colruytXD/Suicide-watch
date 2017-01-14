@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Item_Master : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class Item_Master : MonoBehaviour {
     public bool isInteractable;
 
     public int refNumber;
+
+    public Sprite itemIcon;
 
     public delegate void PlayerItemInteractionHandler(int refNumber, GameObject item, int selectedIndex);
 
@@ -29,8 +32,8 @@ public class Item_Master : MonoBehaviour {
         if (!inventoryMaster.isInventoryFull)
         {
             selectedIndex = inventoryMaster.selectedInventorySlot;
-            inventoryMaster.CallEventAddToInventory(0, refNumber);
-            item.GetComponent<Item_Master>().CallEventItemDeath();
+            inventoryMaster.CallEventAddToInventory(0, item, refNumber);
+            item.transform.position = new Vector3(0, -1000, 0);
         }                                            
     }
     
@@ -40,11 +43,10 @@ public class Item_Master : MonoBehaviour {
     public void CallEventDropItem(int refNumber, GameObject item, int selectedIndex)
     {
         selectedIndex = inventoryMaster.selectedInventorySlot;
-        if(inventoryMaster.inventory[inventoryMaster.selectedInventorySlot] != 0)
+        if(inventoryMaster.inventory[inventoryMaster.selectedInventorySlot] != null)
         {
-            int _refNumber = inventoryMaster.inventory[selectedIndex];
-            EventDropItem(_refNumber, item, selectedIndex);
-            inventoryMaster.CallEventRemoveFromInventory(selectedIndex);
+            EventDropItem(0, inventoryMaster.inventory[inventoryMaster.selectedInventorySlot], selectedIndex);
+            inventoryMaster.CallEventRemoveFromInventory(selectedIndex, null);
         }
         else
         {

@@ -24,8 +24,8 @@ public class Inventory_RemoveFromInventory : MonoBehaviour {
     }
 
     //Sets the index value to 0 (no item)
-    public void RemoveFromInventory(int selectedIndex, int refNumber)
+    public void RemoveFromInventory(int selectedIndex, GameObject item, int refNumber)
     {
-            inventoryMaster.inventory[selectedIndex] = 0;
+            inventoryMaster.inventory[selectedIndex] = null;
     }
 }

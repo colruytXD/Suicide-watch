@@ -19,28 +19,29 @@ public class Inventory_Master : MonoBehaviour
     [Space(10)]
 
     //List that contains all the items refNumbers currently in the inventory
-    public List<int> inventory = new List<int>();
+    public List<GameObject> inventory = new List<GameObject>();
 
-    public delegate void GeneralEventHandler(int selectedIndex, int refNumber);
+    public delegate void GeneralEventHandler(int selectedIndex, GameObject item,  int refNumber);
 
     public event GeneralEventHandler EventRemoveFromInventory;
     public event GeneralEventHandler EventAddToInventory;
 
-    public void CallEventRemoveFromInventory(int selectedIndex)
+    public void CallEventRemoveFromInventory(int selectedIndex, GameObject item)
     {
         isInventoryFull = false;
-        EventRemoveFromInventory(selectedIndex, 0);
+        GameObject removedItem = inventory[selectedIndex];
+        EventRemoveFromInventory(selectedIndex, removedItem, 0);
         print("Removing " + selectedIndex + " index from inventory");
     }
 
-    public void CallEventAddToInventory(int selectedIndex, int refNumber)
+    public void CallEventAddToInventory(int selectedIndex, GameObject item, int refNumber)
     {
-        if (inventory[0] != 0 && inventory[1] != 0)
+        if (inventory[0] != null && inventory[1] != null)
         {
             isInventoryFull = true;
             return;
         }
 
-        EventAddToInventory(selectedIndex, refNumber); 
+        EventAddToInventory(selectedIndex, item,  refNumber); 
     }
 }

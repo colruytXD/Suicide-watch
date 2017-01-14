@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Interactable_Master : MonoBehaviour {
 
-    public List<int> requiredItemsRefNumbers = new List<int>();
+    public List<GameObject> requiredItems = new List<GameObject>();
 
     private Inventory_Master inventoryMaster;
 
@@ -17,18 +17,18 @@ public class Interactable_Master : MonoBehaviour {
 
         for(int i = 0; i < 2; i++)
         {
-            for(int x = 0; x < requiredItemsRefNumbers.Count; x++)
+            for(int x = 0; x < requiredItems.Count; x++)
             {
-                if(inventoryMaster.inventory[i] == requiredItemsRefNumbers[x])
+                if(inventoryMaster.inventory[i] == requiredItems[x])
                 {
                     amountOfRightItems++;
 
-                    inventoryMaster.CallEventRemoveFromInventory(i);
+                    inventoryMaster.CallEventRemoveFromInventory(i, null);
                 }
             }
         }
 
-        if(amountOfRightItems == requiredItemsRefNumbers.Count)
+        if(amountOfRightItems == requiredItems.Count)
         {
             EventPlayerInteracts();
         }

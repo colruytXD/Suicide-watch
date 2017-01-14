@@ -14,7 +14,7 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
         SetInitialReferences();
         inventoryMaster.EventRemoveFromInventory += ChangeInventorySlotTexture;
         inventoryMaster.EventAddToInventory += ChangeInventorySlotTexture;
-        ChangeInventorySlotTexture(0, 0);
+        ChangeInventorySlotTexture(0, null, 0);
     }
 
     void OnDisable()
@@ -32,19 +32,18 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
     }
 
     //Checks the inventory and updates all the inventory slots in UI
-    void ChangeInventorySlotTexture(int SelectedIndex, int refNumber)
+    void ChangeInventorySlotTexture(int SelectedIndex, GameObject item, int refNumber)
     {
         for (int i = 0; i < inventoryMaster.maxInventoryCount; i++)
         {
-            if (inventoryMaster.inventory[i] == 0)
+            if (inventoryMaster.inventory[i] == null)
             {
                 inventoryMaster.inventorySlots[i].sprite = null;
                 inventoryMaster.inventorySlots[i].color = new Color(0, 0, 0, 0);
             }
             else
             {
-                int wantedRefnumber = inventoryMaster.inventory[i];
-                Sprite wantedSprite = itemList.itemImageList[wantedRefnumber - 1];
+                Sprite wantedSprite = inventoryMaster.inventory[i].GetComponent<Item_Master>().itemIcon;
                 inventoryMaster.inventorySlots[i].sprite = wantedSprite;
                 inventoryMaster.inventorySlots[i].color = new Color(255, 255, 255, 100);
             }

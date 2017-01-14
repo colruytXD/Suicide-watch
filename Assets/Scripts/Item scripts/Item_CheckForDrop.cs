@@ -28,7 +28,7 @@ public class Item_CheckForDrop : MonoBehaviour {
         if(Input.GetButtonDown("Drop item"))
         {
             itemMaster.CallEventDropItem(0, null, 0);
-            inventoryMaster.CallEventRemoveFromInventory(inventoryMaster.selectedInventorySlot);
+            inventoryMaster.CallEventRemoveFromInventory(inventoryMaster.selectedInventorySlot, null);
         }
     }
 }

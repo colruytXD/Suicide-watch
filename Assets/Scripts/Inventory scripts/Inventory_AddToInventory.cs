@@ -24,15 +24,15 @@ public class Inventory_AddToInventory : MonoBehaviour {
 	}
 
     //Changes an index of the inventory to the item's refNumber
-    void AddToInventory(int selectedIndex, int refNumber)
+    void AddToInventory(int selectedIndex, GameObject item,  int refNumber)
     {
-        if(inventoryMaster.inventory[0] == 0)
+        if(inventoryMaster.inventory[0] == null)
         {
-            inventoryMaster.inventory[0] = refNumber;
+            inventoryMaster.inventory[0] = item;
         }
-        else if(inventoryMaster.inventory[1] == 0)
+        else if(inventoryMaster.inventory[1] == null)
         {
-            inventoryMaster.inventory[1] = refNumber;
+            inventoryMaster.inventory[1] = item;
         }        
     }
 }
