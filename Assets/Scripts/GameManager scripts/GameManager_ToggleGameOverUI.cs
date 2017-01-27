@@ -6,17 +6,17 @@ public class GameManager_ToggleGameOverUI : MonoBehaviour {
 
     private GameManager_Master gameManagerMaster;
     [SerializeField]
-    private GameObject gameOverUI;
+    private GameObject gameOverPanel;
 
 	void OnEnable() 
 	{
 		SetInitialReferences();
-        gameManagerMaster.EventGameOver += ShowGameOverUI;
+        gameManagerMaster.EventFinishedLevel += ShowGameOverUI;
 	}
 
 	void OnDisable() 
 	{
-        gameManagerMaster.EventGameOver -= ShowGameOverUI;
+        gameManagerMaster.EventFinishedLevel -= ShowGameOverUI;
     }
 
 	void SetInitialReferences() 
@@ -26,11 +26,12 @@ public class GameManager_ToggleGameOverUI : MonoBehaviour {
 
     void ShowGameOverUI()
     {
-        gameOverUI.SetActive(true);
+        gameOverPanel.transform.root.gameObject.SetActive(true);
+        gameOverPanel.SetActive(true);
     }
 
     void HideGameOverUI()
     {
-        gameOverUI.SetActive(false);
+        gameOverPanel.SetActive(false);
     }
 }

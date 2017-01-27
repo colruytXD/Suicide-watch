@@ -36,12 +36,11 @@ public class Inventory_Master : MonoBehaviour
 
     public void CallEventAddToInventory(int selectedIndex, GameObject item, int refNumber)
     {
+
+        EventAddToInventory(selectedIndex, item,  refNumber);
         if (inventory[0] != null && inventory[1] != null)
         {
             isInventoryFull = true;
-            return;
         }
-
-        EventAddToInventory(selectedIndex, item,  refNumber); 
     }
 }

@@ -3,23 +3,24 @@ using System.Collections;
 
 public class Story_Master : MonoBehaviour {
 
-	void OnEnable() 
-	{
-		SetInitialReferences();
-	}
+    public int currentLine;
+    public string[] lines;
+    public float[] pauseTimes;
 
-	void OnDisable() 
-	{
+    public delegate void GeneralEventHandler();
 
-	}
+    public event GeneralEventHandler EventStartStory;
+    public event GeneralEventHandler EventStopStory;
 
-	void Update() 
-	{
+    public void CallEventStartStory()
+    {
+        EventStartStory();
+    }
 
-	}
+    public void CallEventStopStory()
+    {
+        EventStopStory();
+    }
 
-	void SetInitialReferences() 
-	{
 
-	}
 }

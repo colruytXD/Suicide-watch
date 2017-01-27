@@ -4,10 +4,7 @@ using UnityEngine.UI;
 
 public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
 
-    private Item_List itemList;
-
     private Inventory_Master inventoryMaster;
-    private Item_Master itemMaster;
 
     void OnEnable()
     {
@@ -27,8 +24,6 @@ public class Inventory_ChangeInventorySlotImage : MonoBehaviour {
     void SetInitialReferences()
     {
         inventoryMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory_Master>();
-        itemMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Item_Master>();
-        itemList = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Item_List>();
     }
 
     //Checks the inventory and updates all the inventory slots in UI

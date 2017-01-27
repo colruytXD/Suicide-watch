@@ -4,7 +4,6 @@ using System.Collections;
 public class Item_CheckForUse : MonoBehaviour {
 
     Inventory_Master inventoryMaster;
-    Item_List itemList;
 
     RaycastHit hit;
     [SerializeField]
@@ -32,7 +31,6 @@ public class Item_CheckForUse : MonoBehaviour {
 	void SetInitialReferences() 
 	{
         inventoryMaster = transform.root.GetComponent<Inventory_Master>();
-        itemList = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Item_List>();
 	}
 
     void CheckForUse()

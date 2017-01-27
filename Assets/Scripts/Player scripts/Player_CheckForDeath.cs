@@ -27,7 +27,7 @@ public class Player_CheckForDeath : MonoBehaviour {
     {
         if(playerMaster.Health <= 0)
         {
-            gameManagerMaster.CallEventGameOver();
+            gameManagerMaster.CallEventFinishedLevel();
         }
     }
 }

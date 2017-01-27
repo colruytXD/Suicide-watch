@@ -4,7 +4,6 @@ using System.Collections;
 public class Inventory_AddToInventory : MonoBehaviour {
 
     private Inventory_Master inventoryMaster;
-    private Item_Master itemMaster;
 
 	void OnEnable() 
 	{
@@ -20,7 +19,6 @@ public class Inventory_AddToInventory : MonoBehaviour {
 	void SetInitialReferences() 
 	{
         inventoryMaster = GetComponent<Inventory_Master>();
-        itemMaster = GetComponent<Item_Master>();
 	}
 
     //Changes an index of the inventory to the item's refNumber

@@ -11,11 +11,6 @@ public class Inventory_ChangeSelectedSlot : MonoBehaviour {
         ChangeSelectedInventorySlot();
 	}
 
-	void OnDisable() 
-	{
-
-	}
-
 	void Update() 
 	{
         if(Input.GetKeyDown(KeyCode.Alpha1))

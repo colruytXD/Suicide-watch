@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class Item_Master : MonoBehaviour {
 
     private Inventory_Master inventoryMaster;
-    public Item_List itemList;
 
     public bool isInteractable;
 
