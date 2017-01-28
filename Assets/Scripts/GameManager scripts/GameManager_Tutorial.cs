@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class GameManager_Tutorial : MonoBehaviour {
 
-    private GameManager_Master gameManagerMaster;
     private Inventory_Master inventoryMaster;
+    private GameManager_Master gameManagerMaster;
     [SerializeField]
     private float amtOfSeconds;
     [SerializeField]
-    private Text txtTut;
+    private Text txtTut;    
 
     [SerializeField]
     private string activeInventorySlotText = "Press [1] or  [2] to change active inventory slots";
@@ -20,22 +20,25 @@ public class GameManager_Tutorial : MonoBehaviour {
     private string useItemText = "Press [E] to use item in active slot";
 
     public int count;
+    private bool continueTut = true;
 
-	void OnEnable() 
+    void OnEnable() 
 	{
 		SetInitialReferences();
         inventoryMaster.EventAddToInventory += CallTutActiveInvSlot;
+        gameManagerMaster.EventFinishedLevel += discontinueTut;
 	}
 
 	void OnDisable() 
 	{
         inventoryMaster.EventAddToInventory -= CallTutActiveInvSlot;
+        gameManagerMaster.EventFinishedLevel -= discontinueTut;
     }
 
 	void SetInitialReferences() 
 	{
-        gameManagerMaster = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager_Master>();
         inventoryMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory_Master>();
+        gameManagerMaster = GetComponent<GameManager_Master>();
 	}
 
     void CallTutActiveInvSlot(int refNumber, GameObject item, int inventoryIndex)
@@ -47,12 +50,18 @@ public class GameManager_Tutorial : MonoBehaviour {
         }        
     }
 
+    void discontinueTut()
+    {
+        continueTut = false;
+    }
+
     IEnumerator TutActiveInvSlot()
     {
         txtTut.gameObject.SetActive(true);
         txtTut.text = activeInventorySlotText;
         yield return new WaitForSeconds(amtOfSeconds);
         txtTut.gameObject.SetActive(false);
+        if(continueTut)
         StartCoroutine(TutDropItem());
     }
 
@@ -62,6 +71,7 @@ public class GameManager_Tutorial : MonoBehaviour {
         txtTut.text = dropItemText;
         yield return new WaitForSeconds(amtOfSeconds);
         txtTut.gameObject.SetActive(false);
+        if(continueTut)
         StartCoroutine(TutUseItem());
     }
 

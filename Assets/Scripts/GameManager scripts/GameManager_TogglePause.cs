@@ -5,8 +5,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameManager_TogglePause : MonoBehaviour {
 
-    bool cursorHidden = true;
-
     GameManager_Master gameManagerMaster;
     Player_Master playerMaster;
 
@@ -30,20 +28,6 @@ public class GameManager_TogglePause : MonoBehaviour {
         playerMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Master>();
     }
 
-    void OnGUI()
-    {
-        if(cursorHidden)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-    }
-
     void TogglePause()
     {
 
@@ -54,17 +38,12 @@ public class GameManager_TogglePause : MonoBehaviour {
             pausePanel.SetActive(true);
             Time.timeScale = 0;
             playerMaster.CallEventTogglePlayerMov();
-
-            cursorHidden = false;
         }
         else //unpauses game
         {
             pausePanel.SetActive(false);
             Time.timeScale = 1;
             playerMaster.CallEventTogglePlayerMov();
-
-            cursorHidden = true;
-
         }
 
         
