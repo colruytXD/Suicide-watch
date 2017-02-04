@@ -11,12 +11,13 @@ public class GameManager_ToggleCursor : MonoBehaviour {
 	{
 		SetInitialReferences();
         gameManagerMaster.EventTogglePause += ToggleCursor;
+        gameManagerMaster.EventFinishedLevel += ToggleCursor;
 	}
 
 	void OnDisable() 
 	{
-        gameManagerMaster.EventTogglePause += ToggleCursor;
-
+        gameManagerMaster.EventTogglePause -= ToggleCursor;
+        gameManagerMaster.EventFinishedLevel -= ToggleCursor;
     }
 
 	void SetInitialReferences() 
@@ -26,6 +27,7 @@ public class GameManager_ToggleCursor : MonoBehaviour {
 
     void OnGUI()
     {
+        print(cursorHidden);
         if (cursorHidden)
         {
             Cursor.visible = false;
@@ -40,13 +42,6 @@ public class GameManager_ToggleCursor : MonoBehaviour {
 
     void ToggleCursor()
     {
-        if(gameManagerMaster.isPaused)
-        {
-            cursorHidden = false;
-        }
-        else
-        {
-            cursorHidden = true;
-        }
+        cursorHidden = !cursorHidden;
     }
 }

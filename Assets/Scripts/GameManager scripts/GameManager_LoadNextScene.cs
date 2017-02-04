@@ -10,13 +10,13 @@ public class GameManager_LoadNextScene : MonoBehaviour {
 	void OnEnable() 
 	{
 		SetInitialReferences();
-        gameManagerMaster.EventFinishedLevel += LoadNextScene;
+        gameManagerMaster.EventNextLevel += LoadNextScene;
 	}
 
 	void OnDisable() 
 	{
-        gameManagerMaster.EventFinishedLevel += LoadNextScene;
-	}
+        gameManagerMaster.EventNextLevel -= LoadNextScene;
+    }
 
 	void SetInitialReferences() 
 	{

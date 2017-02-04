@@ -16,6 +16,7 @@ public class GameManager_Master : MonoBehaviour {
     public event GeneralEventHandler EventToggleLevelSelector;
     public event GeneralEventHandler EventTogglePause;
     public event GeneralEventHandler EventFinishedLevel;
+    public event GeneralEventHandler EventNextLevel;
 
     public delegate void SceneHandler(int sceneNr);
 
@@ -56,6 +57,11 @@ public class GameManager_Master : MonoBehaviour {
     {
         if(!isLevelFinished)
         EventTogglePause();
+    }
+
+    public void CallEventNextLevel()
+    {
+        EventNextLevel();
     }
 
 }
