@@ -13,6 +13,10 @@ ModelImporter:
     100010: Lamp
     100012: Walls
     100014: Cube
+    100016: Door1
+    100018: Door1.001
+    100020: Sink
+    100022: Door2
     400000: Camera
     400002: Drawer1
     400004: Drawer2
@@ -21,21 +25,37 @@ ModelImporter:
     400010: Lamp
     400012: Walls
     400014: Cube
+    400016: Door1
+    400018: Door1.001
+    400020: Sink
+    400022: Door2
     2300000: Drawer1
     2300002: Drawer2
     2300004: Fridge
     2300006: Walls
     2300008: Cube
+    2300010: Door1
+    2300012: Door1.001
+    2300014: Sink
+    2300016: Door2
     3300000: Drawer1
     3300002: Drawer2
     3300004: Fridge
     3300006: Walls
     3300008: Cube
+    3300010: Door1
+    3300012: Door1.001
+    3300014: Sink
+    3300016: Door2
     4300000: Drawer2
     4300002: Drawer1
     4300004: Fridge
     4300006: Walls
     4300008: Cube
+    4300010: Door1
+    4300012: Sink
+    4300014: Door1.001
+    4300016: Door2
   materials:
     importMaterials: 1
     materialName: 0

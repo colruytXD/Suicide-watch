@@ -18,6 +18,9 @@ public class GameManager_Tutorial : MonoBehaviour {
     private string dropItemText = "Press [R] to drop item in active slot";
     [SerializeField]
     private string useItemText = "Press [E] to use item in active slot";
+    [Space(10)]
+    [SerializeField]
+    private string interactableText = "Press [E] when looking at an interactable";
 
     public int count;
     private bool continueTut = true;
@@ -35,6 +38,12 @@ public class GameManager_Tutorial : MonoBehaviour {
         gameManagerMaster.EventFinishedLevel -= discontinueTut;
     }
 
+    void Start()
+    {
+        if(count == -1)
+        Invoke("CallTutInteractible", 1);
+    }
+
 	void SetInitialReferences() 
 	{
         inventoryMaster = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory_Master>();
@@ -48,6 +57,11 @@ public class GameManager_Tutorial : MonoBehaviour {
             StartCoroutine(TutActiveInvSlot());
             count++;
         }        
+    }
+
+    void CallTutInteractible()
+    {
+        StartCoroutine(TutInteractable());
     }
 
     void discontinueTut()
@@ -79,6 +93,14 @@ public class GameManager_Tutorial : MonoBehaviour {
     {
         txtTut.gameObject.SetActive(true);
         txtTut.text = useItemText;
+        yield return new WaitForSeconds(amtOfSeconds);
+        txtTut.gameObject.SetActive(false);
+    }
+
+    IEnumerator TutInteractable()
+    {
+        txtTut.gameObject.SetActive(true);
+        txtTut.text = interactableText;
         yield return new WaitForSeconds(amtOfSeconds);
         txtTut.gameObject.SetActive(false);
     }
